@@ -17,11 +17,10 @@ def receive():
 def send(event=None):
     msg = my_msg.get()
     my_msg.set("")
+    client_socket.send(bytes(msg, "utf8"))
     if msg == "{exit}":
         client_socket.close()
         window.quit()
-    else:
-        client_socket.send(bytes(msg, "utf8"))
 
 
 def on_closing(event=None):
